@@ -6,37 +6,38 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    clean: true
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
   },
   module: {
     rules: [
       {
         test: /\.(ts|tsx)$/,
         use: 'ts-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
-      }
-    ]
-  },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx']
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html'
-    })
+      template: './public/index.html',
+    }),
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'public')
+      directory: path.join(__dirname, 'public'),
     },
     compress: true,
-    port: 3000,
+    port: 3003,
     hot: true,
     open: true,
-    historyApiFallback: true
-  }
+  },
 };
