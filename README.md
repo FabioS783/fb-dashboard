@@ -12,7 +12,7 @@ Una dashboard React per analizzare le performance delle campagne Facebook Ads, c
 - 🌍 Supporto per la localizzazione italiana
 - 📅 Selezione periodo di analisi
 
-## Metriche Monitorate OK
+## Metriche Monitorate
 
 - CPC (Costo per Click)
 - CTR (Click-Through Rate)
