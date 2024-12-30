@@ -4,6 +4,7 @@ import { it } from 'date-fns/locale';
 import { MetricCard } from './MetricCard';
 import { InsightCard } from './InsightCard';
 import PlatformChart from './PlatformChart';
+import DateRangePicker from './DateRangePicker';
 import { analyzeData } from '../utils/insightsHelper';
 import type { DashboardData, DailyData, Metrics } from '../types/dashboard';
 import { config } from '../config/env';
@@ -121,44 +122,13 @@ export const Dashboard: React.FC = () => {
           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
         )}
       </div>
-
-      {/* Filtri data */}
-      <div className="mb-8 bg-white p-6 rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4">Periodo di analisi</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-end">
-          <div className="flex flex-col">
-            <label htmlFor="startDate" className="text-sm font-medium text-gray-600 mb-1">
-              Data Inizio
-            </label>
-            <input
-              id="startDate"
-              type="date"
-              value={dateRange.startDate}
-              onChange={(e) => setDateRange(prev => ({ ...prev, startDate: e.target.value }))}
-              className="rounded-lg border p-2"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="endDate" className="text-sm font-medium text-gray-600 mb-1">
-              Data Fine
-            </label>
-            <input
-              id="endDate"
-              type="date"
-              value={dateRange.endDate}
-              onChange={(e) => setDateRange(prev => ({ ...prev, endDate: e.target.value }))}
-              className="rounded-lg border p-2"
-            />
-          </div>
-          <button 
-            onClick={fetchData}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            disabled={isLoading}
-          >
-            {isLoading ? 'Caricamento...' : 'Aggiorna'}
-          </button>
-        </div>
-      </div>
+        
+        {/* Filtri data */}
+        <DateRangePicker 
+          dateRange={dateRange}
+          onDateRangeChange={setDateRange}
+          onApply={fetchData}
+        />
 
       {error && (
         <div className="mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
